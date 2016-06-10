@@ -66,7 +66,7 @@
         /*
          Raw output.
         */
-         newtio.c_oflag = 0;
+         newtio.c_oflag = 1;
          
         /*
           ICANON  : enable canonical input
@@ -116,8 +116,16 @@
             to the actual number of characters actually read */
             res = read(fd,buf,255); 
             buf[res]=0;             /* set end of string, so we can printf */
-            printf(":%s:%d\n", buf, res);
-            if (buf[0]=='z') STOP=TRUE;
+            //printf(":%s:%d\n", buf, res);
+
+            //if (buf[0]=='z') STOP=TRUE;
+            if (buf[3]=='0' && buf[3]=='0'){
+ 
+            	printf("%s STOP Meashurement", buf, res);
+ 
+		} else {
+            	printf("%s", buf, res);
+		};
          }
          /* restore the old port settings */
          tcsetattr(fd,TCSANOW,&oldtio);
